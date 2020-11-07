@@ -19,7 +19,7 @@ const Overview = (props) => {
           <>
             {edit[index] ? (
               <>
-                <div className="ten wide column ui grid">
+                <div className="ten wide column ui grid form">
                   <div className="one wide column">{tasks.indexOf(e)}.</div>
                   <div className="thirteen wide column" key={uniqid()}>
                     <input
@@ -30,13 +30,11 @@ const Overview = (props) => {
                     ></input>
                   </div>
                   <div className="one wide column">
-                    <button
+                    <i
                       className="save icon"
                       // type="submit"
                       onClick={() => onSubmitEdit(index)}
-                    >
-                      save
-                    </button>
+                    ></i>
                   </div>
                   <div className="one wide column">
                     <i
