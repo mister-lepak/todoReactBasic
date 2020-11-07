@@ -14,16 +14,16 @@ const Overview = (props) => {
 
   return (
     <div className="ui one column centered grid">
-      {tasks.map((e, index) => {
+      {tasks.map((el, index) => {
         return (
           <>
             {edit[index] ? (
               <>
                 <div className="ten wide column ui grid form">
-                  <div className="one wide column">{tasks.indexOf(e)}.</div>
+                  <div className="one wide column">{index}.</div>
                   <div className="thirteen wide column" key={uniqid()}>
                     <input
-                      onChange={editChange}
+                      onChange={(e) => editChange(e, el)}
                       value={editTask}
                       type="text"
                       autoFocus="true"
@@ -49,9 +49,9 @@ const Overview = (props) => {
             ) : (
               <>
                 <div className="ten wide column ui grid">
-                  <div className="one wide column">{tasks.indexOf(e)}.</div>
+                  <div className="one wide column">{index}.</div>
                   <div className="thirteen wide column" key={uniqid()}>
-                    {e}
+                    {el}
                   </div>
                   <div className="one wide column">
                     <i className="edit icon" onClick={() => onEdit(index)}></i>
@@ -60,7 +60,7 @@ const Overview = (props) => {
                     <i
                       className="close icon"
                       onClick={() => {
-                        onDelete(e);
+                        onDelete(index);
                       }}
                     ></i>
                   </div>

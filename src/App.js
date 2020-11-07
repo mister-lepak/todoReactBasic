@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Overview from "./components/Overview";
+import uniqid from "uniqid";
 
 class App extends Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class App extends Component {
     this.state = {
       task: "",
       tasks: [],
-      id: [],
+      id: [0],
       edit: [],
       editTask: "",
     };
@@ -30,27 +31,34 @@ class App extends Component {
     this.setState({
       tasks: this.state.tasks.concat(this.state.task),
       task: "",
-      id: this.state.id.concat(this.state.id.length + 1),
+      id: this.state.id.concat(this.state.id.length),
       edit: this.state.edit.concat(false),
     });
+    console.log(this.state.id);
   };
 
-  onDelete = (e) => {
+  onDelete = (id) => {
     this.setState({
-      tasks: this.state.tasks.filter((el) => el !== e),
+      tasks: this.state.tasks.filter((el, index) => index !== id),
     });
   };
 
   onEdit = (id) => {
     this.setState({
       edit: this.state.edit.map((el, index) => {
-        return index === id ? true : false;
+        if (index === id) {
+          this.setState({
+            editTask: this.state.tasks[id],
+          });
+          return true;
+        } else {
+          return false;
+        }
       }),
-      editTask: "",
     });
   };
 
-  editChange = (e) => {
+  editChange = (e, val) => {
     this.setState({ editTask: e.target.value });
   };
 
